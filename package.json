@@ -1,0 +1,13 @@
+{
+  "name": "deadpool",
+  "version": "0.1.0",
+  "description": "The deadpool site",
+  "repository": "https://github.com/lkwdwrd/deadpool",
+  "author": "lkwdwrd",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo 'hi'",
+    "testAll": "composer test && npm test"
+  },
+  "devDependencies": {}
+}
