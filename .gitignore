@@ -4,7 +4,7 @@ wp-content/*
 !wp-content/object-cache.php
 !wp-content/themes/
 wp-content/themes/*
-!wp-content/themes/wilson-child
+!wp-content/themes/deadpool
 !wp-content/plugins/
 wp-content/plugins/*
 !wp-content/plugins/lkwdwrd-extras
