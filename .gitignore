@@ -9,6 +9,10 @@ wp-content/themes/*
 wp-content/plugins/*
 !wp-content/plugins/lkwdwrd-extras
 
+# SSH Keys
+.deploy/deployer
+.deploy/deployer.pub
+
 # Ignore the dependency management directories
 vendor/
 node_modules/
