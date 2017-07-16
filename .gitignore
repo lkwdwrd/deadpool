@@ -26,3 +26,5 @@ wp/
 
 # Exclude dist directories
 dist
+
+.DS_Store
