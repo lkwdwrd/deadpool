@@ -41,9 +41,7 @@ module.exports = {
 					fallback: 'style-loader',
 					use: [{
 						loader: 'css-loader',
-						options: {
-							minimize: true
-						}
+						options: {minimize: true}
 					}, 'postcss-loader', 'sass-loader'],
 					publicPath: '../../'
 				} )

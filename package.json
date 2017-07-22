@@ -11,7 +11,7 @@
   },
   "scripts": {
   "lint": "eslint wp-content/themes/assets/js/src/**/*.js",
-  "buil": "webpack -p",
+  "build": "webpack -p",
   "prebuild": "npm run lint",
   "makepot": "cd wp-content/themes/hnf && wpi18n makepot --domain-path languages --type='theme'",
   "watch": "webpack -p --watch",
