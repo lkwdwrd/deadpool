@@ -3,7 +3,7 @@ php:
 - '7.1'
 install:
 - composer install
-script: echo 'deploy only'
+script: yarn build
 cache:
   directories:
   - vendor
