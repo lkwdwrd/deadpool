@@ -6,40 +6,114 @@
  *
  */
 
+$small-bp: 401px;
+$med-bp: 800px;
+
+@font-face {
+	font-family: 'game_of_thronesregular';
+	src: url('../../fonts/game_of_thrones-webfont.woff2') format('woff2'),
+		url('../../fonts/game_of_thrones-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 * {
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
 	background: url("../../img/bg-texture.jpg");
 	background-size: 100% 100%;
-	padding: 50px 0;
+	padding: 50px 0 0;
 }
 
 .main-title {
+	padding: 0.2em 0.5em 0;
 	background-color: #532c12;
 	color: #ffffff;
 	text-align: center;
-	font-size: 3em;
+	font-size: 1.5em;
+	font-family: game_of_thronesregular;
+	font-weight: normal;
+	text-transform: uppercase;
+	@media screen and ( min-width: $small-bp ) {
+		font-size: 1.9em;
+	}
+	@media screen and ( min-width: 625px ) {
+		font-size: 3em;
+	}
 }
 
 .main-subtitle {
+	padding: 0.2em 0.5em 0;
 	text-align: center;
+	font-size: 1em;
+	font-family: game_of_thronesregular;
+	font-weight: normal;
+	text-transform: uppercase;
+	@media screen and ( min-width: $small-bp ) {
+		font-size: 1.25em;
+	}
+	@media screen and ( min-width: 625px ) {
+		font-size: 2em;
+	}
+}
+
+.primary-header {
+	margin-bottom: 2em;
 }
 
 .main-content {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+
+	@media screen and ( min-width: $small-bp ) {
+		margin: 0 3%;
+	}
 }
 
 .section-box {
-	width: 48%;
-	background: darkblue;
-	order: 2;
+	background: #777777;
 	position: relative;
-	margin-bottom: 1em;
+	margin-bottom: 25px;
+	width: 100%;
+
+	@media screen and ( min-width: $small-bp ) {
+		width: 80%;
+		left: 5%;
+		border-radius: 13.5% 0 0 13.5% / 80% 0 0 80%;
+	}
+
+	@media screen and ( min-width: $med-bp ) {
+		width: 40%;
+		left: auto;
+		order: 2;
+	}
+}
+
+.svg-bg {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 98%;
+	height: 100%;
+	width: 20%;
+
+	svg {
+		fill: #777777;
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+	}
+
+	@media screen and ( min-width: 401px ) {
+		display: block;
+	}
 }
 
 .section-box ~ .section-box {
@@ -51,30 +125,74 @@ body {
 }
 
 .section-box-title {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background: rebeccapurple;
-	position: absolute;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	width: 30px;
-	z-index: 0;
+	background: black;
+	padding: 8px 0 5px;
+	font-size: 5vw;
+
+	svg {
+		display: none;
+		position: absolute;
+		height: 100%;
+		top: 0;
+		left: 0;
+	}
+
 	h3 {
-		transform: rotate( 90deg );
-		color: white;
+		font-family: game_of_thronesregular;
+		font-weight: normal;
+		text-transform: uppercase;
+		letter-spacing: 1px;
 		text-align: center;
+		color: white;
+	}
+
+	@media screen and ( min-width: $small-bp ) {
+		padding: 0 0 0 1.25em;
+		background: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		right: 100%;
+		top: 0;
+		bottom: 0;
+		width: 5%;
+		z-index: 0;
+		font-size: 3vw;
+
+		svg {
+			display: block;
+		}
+
+		h3 {
+			transform: rotate( -90deg );
+			margin-left: 50%;
+		}
+	}
+
+	@media screen and ( min-width: $med-bp ) {
+		font-size: 1.5vw;
 	}
 }
 
-.section-box:nth-child(2) .section-box-title,
-.section-box:nth-child(2n+3) .section-box-title {
-	right: auto;
-	left: 0;
+.section-box:nth-child(1) .section-box-title,
+.section-box:nth-child(2n+4) .section-box-title {
+	@media screen and ( min-width: $med-bp ) {
+		right: auto;
+		left: 100%;
+		padding-left: 0;
+		padding-right: 1.25em;
 
-	h3 {
-		transform: rotate( -90deg );
+		svg {
+			left: auto;
+			right: 0;
+			transform: rotate( 180deg );
+		}
+		h3 {
+			margin-left: 0;
+			margin-right: 50%;
+			transform: rotate( 90deg );
+		}
 	}
 }
 
@@ -85,43 +203,345 @@ body {
 	justify-content: space-around;
 	position: relative;
 	z-index: 1;
-	margin-right: 30px;
+	padding: 15px 10px;
+
+	@media screen and ( min-width: $small-bp ) {
+		padding: 5px 0;
+		margin-left: 10%;
+	}
 }
 
-.section-box:nth-child(2) .characters,
-.section-box:nth-child(2n+3) .characters {
-	margin-right: 0;
-	margin-left: 30px;
+.section-box:nth-child(1),
+.section-box:nth-child(2n+4) {
+	@media screen and ( min-width: $med-bp ) {
+		border-radius: 0 13.5% 13.5% 0 / 0 80% 80% 0;
+
+		.characters,
+		.scoreboard-items {
+			margin-left: 0;
+			margin-right: 10%;
+		}
+
+		.svg-bg {
+			left: auto;
+			right: 98%;
+			transform: rotate( 180deg );
+		}
+	}
 }
 
 .score-item {
+	position: relative;
 	text-align: center;
-	width: 23%;
+	width: calc( 1/4 * 100% - 8px );
+
+	.score-item-inside {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		padding: calc( 8 / 4 * 3px) 0;
+		display: flex;
+		flex-direction: column;
+
+		&::after {
+			content: '';
+			position: absolute;
+			display: block;
+			top: calc( 8 / 4 * 3px );
+			bottom: calc( 8 / 4 * 3px );
+			right: 0;
+			left: 0;
+			box-shadow: 2px 2px 10px rgba( 0, 0, 0, 0.5 );
+			z-index: -1;
+		}
+	}
+	&::after {
+		content: '';
+		display: block;
+		padding-top: 144%;
+	}
 }
 
 .score-item-title {
-	background: lightblue;
+	padding: 5px 0 2px;
+	font-size: 2.75vw;
+	background: #000000;
+	color: #ffffff;
+	font-family: game_of_thronesregular;
+	font-weight: normal;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+
+	@media screen and ( min-width: $small-bp ) {
+		font-size: 1.8vw;
+	}
+
+	@media screen and ( min-width: $med-bp ) {
+		font-size: 0.85vw;
+	}
 }
 
 .score-item-content {
-	background: cornflowerblue;
-	font-size: 3em;
+	background: #777777;
+	font-family: 'Trirong', serif;
+	font-size: 16vw;
+	flex: 3;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #ffffff;
+
+	@media screen and ( min-width: $small-bp ) {
+		font-size: 14vw;
+	}
+
+	@media screen and ( min-width: $med-bp ) {
+		font-size: 6vw;
+	}
 }
 
 .character {
-	width: 30%;
+	width: calc( 1/3 * 100% - 5px );
+	padding: calc( 5 / 3 * 2px) 0;
 	position: relative;
 }
 
 .character-img {
 	max-width: 100%;
+	display: block;
+	box-shadow: 2px 2px 10px rgba( 0, 0, 0, 0.5);
 }
 
 .character-name {
+	font-family: georgia, serif;
+	font-weight: 600;
+	font-size: 3vw;
 	position: absolute;
-	background: rebeccapurple;
 	color: #ffffff;
-	padding: 0.5em 1em;
 	left: 0;
-	bottom: 1em;
+	bottom: 12%;
+	height: 0;
+	width: 90%;
+	padding-top: 23%;
+
+	svg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.7));
+	}
+
+	span {
+		text-align: right;
+		padding-right: 1.5em;
+		position: absolute;
+		z-index: 1;
+		top: 50%;
+		transform: translateY( -40% );
+		display: block;
+		width: 100%;
+	}
+
+	@media screen and ( min-width: $small-bp ) {
+		font-size: 2vw;
+	}
+
+	@media screen and ( min-width: $med-bp ) {
+		font-size: 0.9vw;
+	}
+}
+
+/********* Colors ********/
+
+.section-box:nth-child(2) {
+	background: #677e6b;
+	.section-box-title {
+		background: #00381b;
+		@media screen and ( min-width: $small-bp ) {
+			background: none;
+			svg {
+				fill: #00381b;
+			}
+		}
+	}
+	.character-name svg {
+		fill: #00381b;
+	}
+	.svg-bg svg {
+		fill: #677e6b;
+	}
+}
+.score-item:nth-child(2) {
+	.score-item-title {
+		background: #00381b;
+	}
+	.score-item-content {
+		background: #677e6b;
+	}
+}
+
+.section-box:nth-child(3) {
+	background: #7d89ad;
+	.section-box-title {
+		background: #284171;
+		@media screen and ( min-width: $small-bp ) {
+			background: none;
+			svg {
+				fill: #284171;
+			}
+		}
+	}
+	.character-name svg {
+		fill: #284171;
+	}
+	.svg-bg svg {
+		fill: #7d89ad;
+	}
+}
+.score-item:nth-child(3) {
+	.score-item-title {
+		background: #284171;
+	}
+	.score-item-content {
+		background: #7d89ad;
+	}
+}
+
+.section-box:nth-child(4) {
+	background: #c6956f;
+	.section-box-title {
+		background: #914a13;
+		@media screen and ( min-width: $small-bp ) {
+			background: none;
+			svg {
+				fill: #914a13;
+			}
+		}
+	}
+	.character-name svg {
+		fill: #914a13;
+	}
+	.svg-bg svg {
+		fill: #c6956f;
+	}
+}
+.score-item:nth-child(4) {
+	.score-item-title {
+		background: #914a13;
+	}
+	.score-item-content {
+		background: #c6956f;
+	}
+}
+
+.section-box:nth-child(5) {
+	background: #ccb47b;
+	.section-box-title {
+		background: #997a18;
+		@media screen and ( min-width: $small-bp ) {
+			background: none;
+			svg {
+				fill: #997a18;
+			}
+		}
+	}
+	.character-name svg {
+		fill: #997a18;
+	}
+	.svg-bg svg {
+		fill: #ccb47b;
+	}
+}
+.score-item:nth-child(5) {
+	.score-item-title {
+		background: #997a18;
+	}
+	.score-item-content {
+		background: #ccb47b;
+	}
+}
+
+.section-box:nth-child(6) {
+	background: #73a7a8;
+	.section-box-title {
+		background: #00726e;
+		@media screen and ( min-width: $small-bp ) {
+			background: none;
+			svg {
+				fill: #00726e;
+			}
+		}
+	}
+	.character-name svg {
+		fill: #00726e;
+	}
+	.svg-bg svg {
+		fill: #73a7a8;
+	}
+}
+.score-item:nth-child(6) {
+	.score-item-title {
+		background: #00726e;
+	}
+	.score-item-content {
+		background: #73a7a8;
+	}
+}
+
+.section-box:nth-child(7) {
+	background: #a9abae;
+	.section-box-title {
+		background: #5b5c5e;
+		@media screen and ( min-width: $small-bp ) {
+			background: none;
+			svg {
+				fill: #5b5c5e;
+			}
+		}
+	}
+	.character-name svg {
+		fill: #5b5c5e;
+	}
+	.svg-bg svg {
+		fill: #a9abae;
+	}
+}
+.score-item:nth-child(7) {
+	.score-item-title {
+		background: #5b5c5e;
+	}
+	.score-item-content {
+		background: #a9abae;
+	}
+}
+
+.section-box:nth-child(8) {
+	background: #b6715d;
+	.section-box-title {
+		background: #780103;
+		@media screen and ( min-width: $small-bp ) {
+			background: none;
+			svg {
+				fill: #780103;
+			}
+		}
+	}
+	.character-name svg {
+		fill: #780103;
+	}
+	.svg-bg svg {
+		fill: #b6715d;
+	}
+}
+.score-item:nth-child(8) {
+	.score-item-title {
+		background: #780103;
+	}
+	.score-item-content {
+		background: #b6715d;
+	}
 }
