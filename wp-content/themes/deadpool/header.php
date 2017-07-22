@@ -14,7 +14,11 @@
 	</head>
 	<body <?php body_class(); ?>>
 		<header class="primary-header">
-			<h1 class="main-title">Game of Thrones</h1>
-			<h2 class="main-subtitle">Season Seven Deadpool</h2>
+			<h1 class="main-title">
+				<?php echo esc_html( get_bloginfo( 'name' ) ); ?>
+			</h1>
+			<h2 class="main-subtitle">
+				<?php echo esc_html( get_bloginfo( 'description' ) ); ?>
+			</h2>
 		</header>
 		<main class="main-content">

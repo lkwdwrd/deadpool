@@ -24,6 +24,7 @@ function load() {
 function setup() {
 	add_action( 'init', __NAMESPACE__ . '\\register_cpt' );
 	// Add opt-in filters for any meta/taxonomies this post type should support.
+	add_filter( 'characters_meta', __NAMESPACE__ . '\\opt_in' );
 }
 
 /**
@@ -46,7 +47,7 @@ function register_cpt() {
 		'all_items' => __( 'All Players', 'die' ),
 		'search_items' => __( 'Search Players', 'die' ),
 		'not_found' => __( 'No players found.', 'die' ),
-		'not_found_in_trash' => __( 'No players found in Trash.', 'die' )
+		'not_found_in_trash' => __( 'No players found in Trash.', 'die' ),
 	);
 
 	$args = array(
@@ -60,7 +61,7 @@ function register_cpt() {
 		'hierarchical'       => false,
 		'menu_position'      => 5,
 		'menu_icon'          => 'dashicons-format-image',
-		'supports'           => [ 'title' ],
+		'supports'           => [ 'title', 'page-attributes' ],
 	);
 
 	register_post_type( 'player', $args );

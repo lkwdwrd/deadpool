@@ -32,7 +32,7 @@ function setup() {
 function disable_upload_sizes( $sizes, $metadata ) {
 	$type = wp_check_filetype( $metadata['file'] );
 	// See if this is a gif
-	if ( 'image/gif' == $type['type'] ) {
+	if ( 'image/gif' === $type['type'] ) {
 		$sizes = [];
 	}
 	return $sizes;
@@ -46,7 +46,7 @@ function disable_upload_sizes( $sizes, $metadata ) {
  */
 function force_full_size_gifs( $size ) {
 	$pid = get_the_id();
-	$tid = get_post_thumbnail_id( $tid );
+	$tid = get_post_thumbnail_id( $pid );
 
 	if ( ! $tid ) {
 		return $size;

@@ -1,11 +1,13 @@
 <?php
 /**
- * The post meta template file
+ * The character wiki link meta.
  *
  * @package Deadpool
  */
 
- namespace Deadpool\Post_Meta\Meta_Name;
+namespace Deadpool\Post_Meta\Wiki_Link;
+
+use Deadpool\Helpers;
 
 /**
  * Sets up this file with the WordPress API.
@@ -34,27 +36,23 @@ function setup() {
  * @return void
  */
 function display_metabox( $post ) {
-	$current_value = get_post_meta( $post->ID, 'cmeta', true );
-
 	// Output the nonce
-	wp_nonce_field( 'noncy' . $post->ID, 'cmeta-nonce' );
+	wp_nonce_field( 'char_wiki_noncy_' . $post->ID, 'char_wiki_nonce' );
 
 	// Output the form for this meta
 	?>
-		<p>
-			<label for="cmeta">
-				<?php esc_html_e( 'Custom Meta', 'die' ); ?>
-			</label>
-		</p>
-		<p>
-			<input
-				type="text"
-				name="cmeta"
-				id="cmeta"
-				value="<?php echo esc_attr( $current_value ); ?>"
-				class="widefat"
-			/>
-		</p>
+	<label for="char_wiki" class="screen-reader-text">
+		<?php esc_html_e( 'Character Wiki URL', 'die' ); ?>
+	</label>
+	<p>
+		<input
+			type="text"
+			name="char_wiki"
+			id="char_wiki"
+			class="widefat"
+			value="<?php echo esc_url( $post->char_wiki ); ?>"
+		/>
+	</p>
 	<?php
 }
 
@@ -70,26 +68,27 @@ function save( $post_id ) {
 		return;
 	}
 	// Verify post type
-	if ( !in_array( get_post_type( $post_id ), get_post_types() ) ) {
+	if ( ! in_array( get_post_type( $post_id ), get_post_types(), true ) ) {
 		return;
 	}
 	// Verify nonce
-	$nonce_name = 'cmeta-nonce';
-	$nonce_action = 'noncy' . $post_id;
-	$nonce = isset( $_POST[ $nonce_name ] ) ? $_POST[ $nonce_name ] : '';
-	if ( !wp_verify_nonce( $nonce, $nonce_action ) ) {
+	$nonce_name = 'char_wiki_nonce';
+	$nonce_action = 'char_wiki_noncy_' . $post_id;
+	// @codingStandardsIgnoreLine
+	if ( ! wp_verify_nonce( $_POST[ $nonce_name ] ?? '', $nonce_action ) ) {
 		return;
 	}
 	// Verify permissions
-	if ( !current_user_can( 'edit_post', $post_id ) ) {
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
 		return;
 	}
 	// Save data
-	$value = $_POST[ 'cmeta' ] ?? null;
+	// @codingStandardsIgnoreLine
+	$value = $_POST[ 'char_wiki' ] ?? null;
 	if ( null !== $value ) {
-		update_post_meta( $post_id, 'cmeta', $value );
+		update_post_meta( $post_id, 'char_wiki', esc_url_raw( $value ) );
 	} else {
-		delete_post_meta( $post_id, 'cmeta' );
+		delete_post_meta( $post_id, 'char_wiki' );
 	}
 }
 
@@ -99,10 +98,10 @@ function save( $post_id ) {
  * @return void
  */
 function register_meta_boxes() {
-	foreach( get_post_types() as $post_type ) {
+	foreach ( get_post_types() as $post_type ) {
 		add_meta_box(
-			'cmeta-metabox',
-			__( 'Custom Metabox', 'die' ),
+			'char-wiki-metabox',
+			__( 'Character Wiki URL', 'die' ),
 			__NAMESPACE__ . '\\display_metabox',
 			$post_type
 		);
@@ -117,7 +116,7 @@ function register_meta_boxes() {
  * @return boolean            Whether or not to protect the meta key.
  */
 function private_meta( $protected, $meta_key ) {
-	if ( 'cmeta' === $meta_key ){
+	if ( 'char_wiki' === $meta_key ) {
 		$protected = true;
 	}
 	return $protected;
@@ -128,5 +127,5 @@ function private_meta( $protected, $meta_key ) {
  * @return array The post types that support this metabox.
  */
 function get_post_types() {
-	return apply_filters( 'cmeta-pts', [] );
+	return apply_filters( 'char_wiki_meta', [] );
 }

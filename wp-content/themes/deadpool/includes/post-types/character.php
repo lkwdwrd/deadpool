@@ -24,6 +24,8 @@ function load() {
 function setup() {
 	add_action( 'init', __NAMESPACE__ . '\\register_cpt' );
 	// Add opt-in filters for any meta/taxonomies this post type should support.
+	add_action( 'char_status_meta', __NAMESPACE__ . '\\opt_in' );
+	add_action( 'char_wiki_meta', __NAMESPACE__ . '\\opt_in' );
 }
 
 /**
@@ -46,7 +48,7 @@ function register_cpt() {
 		'all_items' => __( 'All Characters', 'die' ),
 		'search_items' => __( 'Search characters', 'die' ),
 		'not_found' => __( 'No characters found.', 'die' ),
-		'not_found_in_trash' => __( 'No characters found in Trash.', 'die' )
+		'not_found_in_trash' => __( 'No characters found in Trash.', 'die' ),
 	);
 
 	$args = array(
@@ -60,7 +62,7 @@ function register_cpt() {
 		'hierarchical'       => false,
 		'menu_position'      => 5,
 		'menu_icon'          => 'dashicons-format-image',
-		'supports'           => [ 'title' ],
+		'supports'           => [ 'title', 'thumbnail' ],
 	);
 
 	register_post_type( 'character', $args );

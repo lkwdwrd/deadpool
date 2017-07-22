@@ -28,7 +28,7 @@ function setup() {
 	add_filter( 'xmlrpc_enabled', '__return_false' );
 	add_action( 'template_redirect', __NAMESPACE__ . '\\attachments', 1 );
 	add_filter( 'attachment_link', '__return_empty_string' );
-	add_action( 'current_screen', __NAMESPACE__ . '\\restrict_admin_pages' );
+	add_action( 'current_screen', __NAMESPACE__ . '\\admin_pages' );
 	add_action( 'admin_menu', __NAMESPACE__ . '\\menus' );
 	add_action( 'wp_before_admin_bar_render', __NAMESPACE__ . '\\admin_bar' );
 	add_action( 'wp_dashboard_setup', __NAMESPACE__ . '\\dashboard_widgets' );
@@ -77,7 +77,7 @@ function pingback_header( $headers ) {
  * @return array
  */
 function trackback_rewrites( $rules ) {
-	foreach( $rules as $rule => $rewrite ) {
+	foreach ( $rules as $rule => $rewrite ) {
 		if ( false !== strpos( $rule, 'trackback' ) ) {
 			unset( $rules[ $rule ] );
 		}
@@ -91,7 +91,7 @@ function trackback_rewrites( $rules ) {
  *
  * @return void
  */
-function attachment_redirect() {
+function attachments() {
 	if ( ! is_attachment() ) {
 		return;
 	}
@@ -152,7 +152,7 @@ function admin_bar() {
  */
 function dashboard_widgets() {
 	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
-	remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
+	remove_meta_box( 'dashboard_activity', 'dashboard', 'normal' );
 }
 
 /**
@@ -177,7 +177,13 @@ function rest_api_auth( $result ) {
 	}
 
 	if ( ! is_user_logged_in() ) {
-		return new \WP_Error( 'rest_not_logged_in', 'You are not currently logged in.', array( 'status' => 401 ) );
+		return new \WP_Error(
+			'rest_not_logged_in',
+			'You are not currently logged in.',
+			[
+				'status' => 401,
+			]
+		);
 	}
 
 	return $result;
