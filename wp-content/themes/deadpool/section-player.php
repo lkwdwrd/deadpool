@@ -18,7 +18,16 @@ $characters = Helpers\get_characters();
 	<?php if ( 0 < count( $characters ) ) : ?>
 		<div class="characters">
 			<?php foreach ( $characters as $character ) : ?>
-				<div class="character">
+				<?php if ( $character->char_wiki ) : ?>
+					<a
+						class="character"
+						href="<?php echo esc_url( $character->char_wiki ); ?>"
+						title="<?php echo esc_html( get_the_title( $character ) ); ?>"
+						rel="bookmark"
+					>
+				<?php else : ?>
+					<div class="character">
+				<?php endif; ?>
 					<h4 class="character-name">
 						<?php require DIE_PATH . 'assets/img/charname-bg.svg'; ?>
 						<span>
@@ -32,7 +41,11 @@ $characters = Helpers\get_characters();
 							'class' => 'character-img',
 						]
 					); ?>
-				</div>
+				<?php if ( $character->char_wiki ) : ?>
+					</a>
+				<?php else : ?>
+					</div>
+				<?php endif; ?>
 			<?php endforeach; ?>
 		</div>
 	<?php endif; ?>
