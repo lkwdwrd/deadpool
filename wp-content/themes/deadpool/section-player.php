@@ -36,7 +36,7 @@ $characters = Helpers\get_characters();
 					</h4>
 					<?php echo get_the_post_thumbnail(
 						$character,
-						'thumbnail',
+						'full',
 						[
 							'class' => 'character-img',
 						]
