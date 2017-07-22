@@ -3,6 +3,7 @@ php:
 - '7.1'
 install:
 - composer install
+- yarn install
 script: yarn build
 cache:
   directories:
