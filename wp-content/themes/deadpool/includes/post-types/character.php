@@ -61,7 +61,7 @@ function register_cpt() {
 		'has_archive'        => false,
 		'hierarchical'       => false,
 		'menu_position'      => 5,
-		'menu_icon'          => 'dashicons-format-image',
+		'menu_icon'          => 'dashicons-id-alt',
 		'supports'           => [ 'title', 'thumbnail' ],
 	);
 
