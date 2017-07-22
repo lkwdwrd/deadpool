@@ -60,7 +60,7 @@ function register_cpt() {
 		'has_archive'        => false,
 		'hierarchical'       => false,
 		'menu_position'      => 5,
-		'menu_icon'          => 'dashicons-universal-access',
+		'menu_icon'          => 'dashicons-universal-access-alt',
 		'supports'           => [ 'title', 'page-attributes' ],
 	);
 
